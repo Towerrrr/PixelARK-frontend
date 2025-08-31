@@ -1,0 +1,66 @@
+<template>
+  <div id="globalHeader">
+    <div class="left-bar">
+      <RouterLink to="/">
+        <div class="title-bar">
+          <img class="logo" src="../assets/logo.png" alt="logo" />
+          <div class="title">PixelARK</div>
+        </div>
+      </RouterLink>
+      <a-menu v-model:selectedKeys="current" mode="horizontal" :items="items" />
+    </div>
+
+    <div class="user-login-status">
+      <a-button type="primary" href="/user/login">登录</a-button>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { h, ref } from 'vue';
+import { HomeOutlined } from '@ant-design/icons-vue';
+import type { MenuProps } from 'ant-design-vue';
+const current = ref<string[]>(['home']);
+const items = ref<MenuProps['items']>([
+  {
+    key: '/',
+    icon: () => h(HomeOutlined),
+    label: '主页',
+    title: '主页',
+  },
+  {
+    key: '/about',
+    label: '关于',
+    title: '关于',
+  },
+]);
+</script>
+
+<style scoped>
+#globalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-bar {
+  display: flex;
+  align-items: center;
+}
+
+.title-bar {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+}
+
+.title {
+  color: black;
+  font-size: 18px;
+  margin-left: 16px;
+}
+
+.logo {
+  height: 48px;
+}
+</style>
