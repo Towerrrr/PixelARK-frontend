@@ -7,7 +7,7 @@
           <div class="title">PixelARK</div>
         </div>
       </RouterLink>
-      <a-menu v-model:selectedKeys="current" mode="horizontal" :items="items" />
+      <a-menu v-model:selectedKeys="current" mode="horizontal" :items="items" @click="doMenuClick" />
     </div>
 
     <div class="user-login-status">
@@ -34,6 +34,17 @@ const items = ref<MenuProps['items']>([
     title: '关于',
   },
 ]);
+
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+// 路由跳转事件
+const doMenuClick = ({ key }: { key: string }) => {
+  router.push({
+    path: key,
+  });
+};
+
 </script>
 
 <style scoped>
