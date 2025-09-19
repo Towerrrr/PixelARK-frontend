@@ -11,7 +11,12 @@
     </div>
 
     <div class="user-login-status">
-      <a-button type="primary" href="/user/login">登录</a-button>
+      <div v-if="loginUserStore.loginUser.id">
+        {{ loginUserStore.loginUser.userName ?? '无名' }}
+      </div>
+      <div v-else>
+        <a-button type="primary" href="/user/login">登录</a-button>
+      </div>
     </div>
   </div>
 </template>
@@ -21,8 +26,11 @@ import { h, ref } from 'vue';
 import { HomeOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
 import { useRouter } from "vue-router";
+import { useLoginUserStore } from "@/stores/user";
 
 const router = useRouter();
+const loginUserStore = useLoginUserStore();
+
 // 当前选中菜单
 const current = ref<string[]>([]);
 // 监听路由变化，更新当前选中菜单
