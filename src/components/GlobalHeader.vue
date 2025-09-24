@@ -12,8 +12,21 @@
 
     <div class="user-login-status">
       <div v-if="loginUserStore.loginUser.id">
+    <a-dropdown>
+      <ASpace>
+        <a-avatar :src="loginUserStore.loginUser.userAvatar" />
         {{ loginUserStore.loginUser.userName ?? '无名' }}
-      </div>
+      </ASpace>
+      <template #overlay>
+        <a-menu>
+          <a-menu-item @click="doLogout">
+            <LogoutOutlined />
+            退出登录
+          </a-menu-item>
+        </a-menu>
+      </template>
+    </a-dropdown>
+  </div>
       <div v-else>
         <a-button type="primary" href="/user/login">登录</a-button>
       </div>
@@ -56,7 +69,20 @@ const doMenuClick = ({ key }: { key: string }) => {
     path: key,
   });
 };
-
+// 用户注销
+const doLogout = async () => {
+  const res = await userLogoutUsingPost()
+  console.log(res)
+  if (res.data.code === 0) {
+    loginUserStore.setLoginUser({
+      userName: '未登录',
+    })
+    message.success('退出登录成功')
+    await router.push('/user/login')
+  } else {
+    message.error('退出登录失败，' + res.data.message)
+  }
+}
 </script>
 
 <style scoped>
