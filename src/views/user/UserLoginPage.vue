@@ -27,10 +27,39 @@
 </template>
 
 <script setup lang="ts">
+import { userLoginUsingPost } from '@/api/userController';
+import { useLoginUserStore } from '@/stores/user';
+import { message } from 'ant-design-vue';
+import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+
 const formState = reactive<API.UserLoginRequest>({
   userAccount: '',
   userPassword: '',
 })
+
+const router = useRouter()
+const loginUserStore = useLoginUserStore()
+
+/**
+ * 提交表单
+ * @param values
+ */
+const handleSubmit = async (values: any) => {
+  const res = await userLoginUsingPost(values)
+  // 登录成功，把登录态保存到全局状态中
+  if (res.data.code === 0 && res.data.data) {
+    await loginUserStore.fetchLoginUser()
+    message.success('登录成功')
+    router.push({
+      path: '/',
+      replace: true,
+    })
+  } else {
+    message.error('登录失败，' + res.data.message)
+  }
+}
+
 </script>
 
 <style scoped>
