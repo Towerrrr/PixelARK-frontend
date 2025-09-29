@@ -42,6 +42,11 @@
 </template>
 
 <script setup lang="ts">
+import { userRegisterUsingPost } from '@/api/userController'
+import { message } from 'ant-design-vue'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
 const formState = reactive<API.UserRegisterRequest>({
   userAccount: '',
   userPassword: '',
