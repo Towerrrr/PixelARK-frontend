@@ -39,7 +39,7 @@ import { h, ref } from 'vue';
 import { HomeOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
 import { useRouter } from "vue-router";
-import { useLoginUserStore } from "@/stores/user";
+import { useLoginUserStore } from "@/stores/useLoginUserStore";
 import { userLogoutUsingPost } from "@/api/userController";
 import { message } from 'ant-design-vue';
 
