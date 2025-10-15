@@ -64,6 +64,11 @@ const items = ref<MenuProps['items']>([
     label: '用户管理',
     title: '用户管理',
   },
+  {
+    key: '/add_picture',
+    label: '创建图片',
+    title: '创建图片',
+  }
 ]);
 // 路由跳转事件
 const doMenuClick = ({ key }: { key: string }) => {
