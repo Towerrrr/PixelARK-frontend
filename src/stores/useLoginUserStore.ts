@@ -1,11 +1,11 @@
-import { defineStore } from "pinia";
-import { ref } from "vue";
-import { getLoginUserUsingGet } from "@/api/userController";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { getLoginUserUsingGet } from '@/api/userController'
 
-export const useLoginUserStore = defineStore("loginUser", () => {
+export const useLoginUserStore = defineStore('loginUser', () => {
   const loginUser = ref<any>({
-    userName: "未登录",
-  });
+    userName: '未登录',
+  })
 
   async function fetchLoginUser() {
     const res = await getLoginUserUsingGet()
@@ -15,8 +15,8 @@ export const useLoginUserStore = defineStore("loginUser", () => {
   }
 
   function setLoginUser(newLoginUser: any) {
-    loginUser.value = newLoginUser;
+    loginUser.value = newLoginUser
   }
 
-  return { loginUser, setLoginUser, fetchLoginUser };
-});
+  return { loginUser, setLoginUser, fetchLoginUser }
+})

@@ -75,7 +75,6 @@ const handleSubmit = async (values: any) => {
     message.error('注册失败，' + res.data.message)
   }
 }
-
 </script>
 
 <style scoped>

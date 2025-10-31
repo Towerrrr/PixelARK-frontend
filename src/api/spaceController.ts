@@ -6,7 +6,7 @@ import request from '@/request'
 export async function getSpaceVoByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getSpaceVOByIdUsingGETParams,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseSpaceVO_>('/api/space/get/vo', {
     method: 'GET',
@@ -28,7 +28,7 @@ export async function listSpaceLevelUsingGet(options?: { [key: string]: any }) {
 /** updateSpace POST /api/space/update */
 export async function updateSpaceUsingPost(
   body: API.SpaceUpdateRequest,
-  options?: { [key: string]: any }
+  options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseBoolean_>('/api/space/update', {
     method: 'POST',

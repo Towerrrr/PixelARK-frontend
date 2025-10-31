@@ -32,7 +32,7 @@ const router = createRouter({
       path: '/add_picture',
       name: '创建图片',
       component: AddPicturePage,
-    }
+    },
   ],
 })
 

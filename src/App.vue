@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BasicLayout from "@/layouts/BasicLayout.vue";
-import { useLoginUserStore } from "@/stores/useLoginUserStore";
+import BasicLayout from '@/layouts/BasicLayout.vue'
+import { useLoginUserStore } from '@/stores/useLoginUserStore'
 const loginUserStore = useLoginUserStore()
 loginUserStore.fetchLoginUser()
 </script>
@@ -11,5 +11,4 @@ loginUserStore.fetchLoginUser()
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

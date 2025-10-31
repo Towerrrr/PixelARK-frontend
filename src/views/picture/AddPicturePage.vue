@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const picture = ref<API.PictureVO>()
 const onSuccess = (newPicture: API.PictureVO) => {

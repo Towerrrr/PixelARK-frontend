@@ -12,11 +12,11 @@
   </a-form>
 
   <a-table
-  :columns="columns"
-  :data-source="dataList"
-  :pagination="pagination"
-  @change="doTableChange"
-  class="table"
+    :columns="columns"
+    :data-source="dataList"
+    :pagination="pagination"
+    @change="doTableChange"
+    class="table"
   >
     <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
@@ -50,11 +50,11 @@
 </template>
 
 <script lang="ts" setup>
-import { deleteUserUsingPost, listUserVoByPageUsingPost } from '@/api/userController';
-import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import { message } from 'ant-design-vue';
-import { computed, onMounted, reactive, ref } from 'vue';
-import dayjs from 'dayjs';
+import { deleteUserUsingPost, listUserVoByPageUsingPost } from '@/api/userController'
+import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue'
+import { message } from 'ant-design-vue'
+import { computed, onMounted, reactive, ref } from 'vue'
+import dayjs from 'dayjs'
 
 const columns = [
   {
@@ -93,7 +93,7 @@ const columns = [
     title: '操作',
     key: 'action',
   },
-];
+]
 
 // 数据
 const dataList = ref<API.UserVO[]>([])
@@ -133,7 +133,7 @@ const doTableChange = (page: any) => {
 // 获取数据
 const fetchData = async () => {
   const res = await listUserVoByPageUsingPost({
-    ...searchParams
+    ...searchParams,
   })
   if (res.data.data) {
     dataList.value = res.data.data.records ?? []
@@ -162,7 +162,6 @@ const doDelete = async (id: string) => {
     message.error('删除失败')
   }
 }
-
 </script>
 
 <style scoped>

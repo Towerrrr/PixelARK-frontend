@@ -1,27 +1,26 @@
 <template>
   <div class="picture-upload">
-  <a-upload
-    list-type="picture-card"
-    :show-upload-list="false"
-    :custom-request="handleUpload"
-    :before-upload="beforeUpload"
-  >
-    <img v-if="picture?.url" :src="picture?.url" alt="avatar" />
-    <div v-else>
-      <loading-outlined v-if="loading"></loading-outlined>
-      <plus-outlined v-else></plus-outlined>
-      <div class="ant-upload-text">点击或拖拽上传图片</div>
-    </div>
-  </a-upload>
-</div>
-
+    <a-upload
+      list-type="picture-card"
+      :show-upload-list="false"
+      :custom-request="handleUpload"
+      :before-upload="beforeUpload"
+    >
+      <img v-if="picture?.url" :src="picture?.url" alt="avatar" />
+      <div v-else>
+        <loading-outlined v-if="loading"></loading-outlined>
+        <plus-outlined v-else></plus-outlined>
+        <div class="ant-upload-text">点击或拖拽上传图片</div>
+      </div>
+    </a-upload>
+  </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
-import { message } from 'ant-design-vue';
-import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
-import { uploadPictureUsingPost } from '@/api/pictureController';
+import { ref } from 'vue'
+import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue'
+import { message } from 'ant-design-vue'
+import type { UploadChangeParam, UploadProps } from 'ant-design-vue'
+import { uploadPictureUsingPost } from '@/api/pictureController'
 
 interface Props {
   picture?: API.PictureVO
@@ -30,32 +29,32 @@ interface Props {
 
 const props = defineProps<Props>()
 function getBase64(img: Blob, callback: (base64Url: string) => void) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result as string));
-  reader.readAsDataURL(img);
+  const reader = new FileReader()
+  reader.addEventListener('load', () => callback(reader.result as string))
+  reader.readAsDataURL(img)
 }
 
-const fileList = ref([]);
-const loading = ref<boolean>(false);
-const imageUrl = ref<string>('');
+const fileList = ref([])
+const loading = ref<boolean>(false)
+const imageUrl = ref<string>('')
 
 const handleChange = (info: UploadChangeParam) => {
   if (info.file.status === 'uploading') {
-    loading.value = true;
-    return;
+    loading.value = true
+    return
   }
   if (info.file.status === 'done') {
     // Get this url from response in real world.
     getBase64(info.file.originFileObj, (base64Url: string) => {
-      imageUrl.value = base64Url;
-      loading.value = false;
-    });
+      imageUrl.value = base64Url
+      loading.value = false
+    })
   }
   if (info.file.status === 'error') {
-    loading.value = false;
-    message.error('upload error');
+    loading.value = false
+    message.error('upload error')
   }
-};
+}
 
 const beforeUpload = (file: UploadProps['fileList'][number]) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -76,7 +75,7 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
 const handleUpload = async ({ file }: any) => {
   loading.value = true
   try {
-    const params = props.picture ? { id: props.picture.id } : {};
+    const params = props.picture ? { id: props.picture.id } : {}
     const res = await uploadPictureUsingPost(params, {}, file)
     if (res.data.code === 0 && res.data.data) {
       message.success('图片上传成功')
@@ -92,7 +91,7 @@ const handleUpload = async ({ file }: any) => {
   }
 }
 
-const params = props.picture ? { id: props.picture.id } : {};
+const params = props.picture ? { id: props.picture.id } : {}
 </script>
 <style scoped>
 .avatar-uploader > .ant-upload {
